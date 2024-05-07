@@ -44,11 +44,11 @@ const CoffeeCard: React.FC<CoffeeCardProps> = ({
                     <Text style={styles.CardRatingText}>{average_rating}</Text>
                 </View>
             </ImageBackground>
-            <Text>{name}</Text>
-            <Text>{special_ingredient}</Text>
+            <Text style={styles.CardTitle}>{name}</Text>
+            <Text style={styles.CardSubtitle}>{special_ingredient}</Text>
             <View style={styles.CardFooterRow}>
-                <Text>$<Text>{price.price}</Text></Text>
-                <TouchableOpacity>
+                <Text style={styles.CardPriceCurrency}>$<Text style={styles.CardPrice}>{price.price}</Text></Text>
+                <TouchableOpacity onPress={()=>{}}>
                     <BGIcon color={COLORS.primaryWhiteHex}
                         name={'add'}
                         BGColor={COLORS.primaryOrangeHex}
@@ -65,6 +65,9 @@ export default CoffeeCard
 
 const styles = StyleSheet.create({
     CardLinearGradientContainer: {
+        padding: SPACING.space_15,
+        borderRadius: BORDERRADIUS.radius_25
+
 
     },
     CardImageBg: {
@@ -81,21 +84,44 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         gap: SPACING.space_10,
         paddingHorizontal: SPACING.space_10,
-        position:'absolute',
+        position: 'absolute',
         borderBottomLeftRadius: BORDERRADIUS.radius_20,
         borderTopRightRadius: BORDERRADIUS.radius_20,
-        top:0,
-        right:0,
-       
+        top: 0,
+        right: 0,
+
     },
     CardRatingText: {
-        fontFamily:FONTFAMILY.poppins_medium,
-        color:COLORS.primaryWhiteHex,
-        lineHeight:22,
-        fontSize:FONTSIZE.size_14
+        fontFamily: FONTFAMILY.poppins_medium,
+        color: COLORS.primaryWhiteHex,
+        lineHeight: 22,
+        fontSize: FONTSIZE.size_14
 
     },
     CardFooterRow: {
+        flexDirection: 'row',
+        justifyContent:'space-between',
+        alignItems:'center',
+        marginTop:SPACING.space_10
+    },
+    CardTitle: {
+        fontFamily: FONTFAMILY.poppins_medium,
+        color: COLORS.primaryWhiteHex,
+        fontSize: FONTSIZE.size_16
+    },
+    CardSubtitle: {
+        fontFamily: FONTFAMILY.poppins_light,
+        color: COLORS.primaryWhiteHex,
+        fontSize: FONTSIZE.size_10
 
-    }
+    },
+    CardPriceCurrency: {
+        fontFamily: FONTFAMILY.poppins_semibold,
+        color: COLORS.primaryOrangeHex,
+        fontSize: FONTSIZE.size_18
+    },
+    CardPrice: {
+        color: COLORS.primaryWhiteHex,
+    },
+
 })
