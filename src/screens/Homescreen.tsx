@@ -88,7 +88,11 @@ const Homescreen = () => {
           )}>
             <CustomIcon style={styles.InputIcon} name='search' size={FONTSIZE.size_18} color={searchText.length > 0 ? COLORS.primaryOrangeHex : COLORS.primaryLightGreyHex} />
           </TouchableOpacity>
-          <TextInput placeholder='Find Your  Coffee...' value={searchText} onChangeText={text => setSearchText(text)} placeholderTextColor={COLORS.primaryLightGreyHex} style={styles.TextInputContainer} />
+          <TextInput placeholder='Find Your  Coffee...' value={searchText}
+           onChangeText={text =>{ setSearchText(text)
+            searchCoffee(text);
+           }}
+            placeholderTextColor={COLORS.primaryLightGreyHex} style={styles.TextInputContainer} />
 
           {searchText.length > 0 ? (
             <TouchableOpacity onPress={()=>{
