@@ -6,6 +6,8 @@ import { BORDERRADIUS, COLORS, FONTFAMILY, FONTSIZE, SPACING } from '../theme/th
 import HeaderBar from '../components/HeaderBar'
 import CustomIcon from '../components/CustomIcon'
 import CoffeeCard from '../components/CoffeeCard'
+import Details from '../screens/DetailsScreen'
+
 
 const getCategoriesFromData = (data: any) => {
   let temp: any = {};
@@ -32,7 +34,7 @@ const getCoffeeList = (category: string, data: any) => {
   }
 }
 
-const Homescreen = () => {
+const Homescreen = ({navigation}:any) => {
   const CoffeeList = useStore((state: any) => state.CoffeeList);
   const BeanList = useStore((state: any) => state.BeanList);
 
@@ -139,7 +141,7 @@ const Homescreen = () => {
           data={sortedCoffee} contentContainerStyle={styles.FlatListContainer}
           keyExtractor={item => item.id}
           renderItem={({ item }) => {
-            return (<TouchableOpacity onPress={() => { }}>
+            return (<TouchableOpacity onPress={() =>{ navigation.push('Details'), {index:item.index, id:item.id, type:item.type} }}>
               <CoffeeCard
                 id={item.id}
                 index={item.index}
@@ -164,7 +166,7 @@ const Homescreen = () => {
           data={BeanList} contentContainerStyle={[styles.FlatListContainer, { marginBottom: tabBarHeight }]}
           keyExtractor={item => item.id}
           renderItem={({ item }) => {
-            return (<TouchableOpacity onPress={() => { }}>
+            return (<TouchableOpacity  onPress={() =>{ navigation.push('Details'), {index:item.index, id:item.id, type:item.type} }}>
               <CoffeeCard
                 id={item.id}
                 index={item.index}
