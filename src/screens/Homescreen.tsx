@@ -6,7 +6,7 @@ import { BORDERRADIUS, COLORS, FONTFAMILY, FONTSIZE, SPACING } from '../theme/th
 import HeaderBar from '../components/HeaderBar'
 import CustomIcon from '../components/CustomIcon'
 import CoffeeCard from '../components/CoffeeCard'
-import Details from '../screens/DetailsScreen'
+
 
 
 const getCategoriesFromData = (data: any) => {
@@ -141,7 +141,7 @@ const Homescreen = ({navigation}:any) => {
           data={sortedCoffee} contentContainerStyle={styles.FlatListContainer}
           keyExtractor={item => item.id}
           renderItem={({ item }) => {
-            return (<TouchableOpacity onPress={() =>{ navigation.push('Details'), {index:item.index, id:item.id, type:item.type} }}>
+            return (<TouchableOpacity onPress={() =>{ navigation.push('Details', {index:item.index, id:item.id, type:item.type} ) }}>
               <CoffeeCard
                 id={item.id}
                 index={item.index}
