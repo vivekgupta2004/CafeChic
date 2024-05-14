@@ -120,7 +120,7 @@ export const useStore = create(
                         }
                     }
                     let spliceIndex = -1;
-                    for(let i=0;i<state.FavroitesList.length;i++){
+                    for(let i=0;i<state.FavoritesList.length;i++){
                         if(state.FavoritesList[i].id == id){
                             spliceIndex =i;
                             break
