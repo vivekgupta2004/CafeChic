@@ -78,7 +78,7 @@ const ImageBackgroundInfo: React.FC<ImageBackgroundInfoProps> = ({
 
                                 </View>
                                 <View style={styles.ProperFirst}>
-                                    <CustomIcon name={type == 'Bean' ? 'location' : 'drops'}
+                                    <CustomIcon name={type == 'Bean' ? 'location' : 'drop'}
                                         size={FONTSIZE.size_16}
                                         color={COLORS.primaryOrangeHex} />
                                     <Text style={[styles.PropertyTextLast]}>{ingredients}</Text>

@@ -146,7 +146,7 @@ const Homescreen = ({navigation}:any) => {
                 id={item.id}
                 index={item.index}
                 type={item.type}
-                rosted={item.rosted}
+                roasted={item.roasted}
                 imagelink_square={item.imagelink_square}
                 name={item.name}
                 special_ingredient={item.special_ingredient}
@@ -166,12 +166,12 @@ const Homescreen = ({navigation}:any) => {
           data={BeanList} contentContainerStyle={[styles.FlatListContainer, { marginBottom: tabBarHeight }]}
           keyExtractor={item => item.id}
           renderItem={({ item }) => {
-            return (<TouchableOpacity  onPress={() =>{ navigation.push('Details'), {index:item.index, id:item.id, type:item.type} }}>
+            return (<TouchableOpacity  onPress={() =>{ navigation.push('Details', {index:item.index , id : item.id , type: item.type} )}}>
               <CoffeeCard
                 id={item.id}
                 index={item.index}
                 type={item.type}
-                rosted={item.rosted}
+                roasted={item.roasted}
                 imagelink_square={item.imagelink_square}
                 name={item.name}
                 special_ingredient={item.special_ingredient}
