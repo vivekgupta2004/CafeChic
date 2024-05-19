@@ -21,7 +21,8 @@ export const useStore = create(
                     if (state.CartList[i].id == cartItem.id) {
                         found = true;
                         let size = false;
-                        for (let j = 0; j < state.CartList[i].price.length; j++) {
+                        
+                        for (let j = 0; j < state.CartList[i].prices.length; j++) {
                             if (state.CartList[i].prices[j].size == cartItem.prices[0].size) {
                                 size = true;
                                 state.CartList[i].prices[j].quantity++;
@@ -32,7 +33,7 @@ export const useStore = create(
                             state.CartList[i].prices.push(cartItem.prices[0]);
 
                         }
-                        state.CartList[i].price.sort((a: any, b: any) => {
+                        state.CartList[i].prices.sort((a: any, b: any) => {
                             if (a.size > b.size) {
                                 return -1;
                             }

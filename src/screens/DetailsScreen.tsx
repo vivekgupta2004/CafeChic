@@ -22,6 +22,14 @@ const DetailsScreen = ({ navigation, route }: any) => {
     favourite ? deleteFromFavoriteList(type, id) : addToFavoriteList(type, id)
 
   }
+  const addToCart = useStore((state: any) => state.addToCart);
+  const calculateCartPrice = useStore((state: any) => state.calculateCartPrice);
+
+  const addToCarthandler = ({ id, index, name, roasted, imagelink_square, special_ingredient, type, price }: any) => {
+    addToCart({ id, index, name, roasted, imagelink_square, special_ingredient, type, prics: [{ ...price, quantity: 1 }] });
+    calculateCartPrice();
+    navigation.navigate('Cart')
+  }
 
   const [price, setPrice] = useState(ItemofIndex.prices[0])
 
@@ -64,17 +72,18 @@ const DetailsScreen = ({ navigation, route }: any) => {
           <Text style={styles.InfoTitle}>Size</Text>
           <View style={styles.SizeOutContainer}>
             {
-              ItemofIndex.prices.map((data:any)=>(
+              ItemofIndex.prices.map((data: any) => (
                 <TouchableOpacity
-                onPress={()=>{
-                  setPrice(data)
-                }}
-                key={data.size}
-                style={[styles.SizeBox,{
-                  borderColor: data.size == price.size ? COLORS.primaryOrangeHex : COLORS.primaryDarkGreyHex
-                }]} >
-                  <Text style={[styles.SizeText, {fontSize:ItemofIndex.type == "bean"? FONTSIZE.size_14:FONTSIZE.size_16,
-                    color:data.size == price.size ? COLORS.primaryOrangeHex : COLORS.secondaryLightGreyHex
+                  onPress={() => {
+                    setPrice(data)
+                  }}
+                  key={data.size}
+                  style={[styles.SizeBox, {
+                    borderColor: data.size == price.size ? COLORS.primaryOrangeHex : COLORS.primaryDarkGreyHex
+                  }]} >
+                  <Text style={[styles.SizeText, {
+                    fontSize: ItemofIndex.type == "bean" ? FONTSIZE.size_14 : FONTSIZE.size_16,
+                    color: data.size == price.size ? COLORS.primaryOrangeHex : COLORS.secondaryLightGreyHex
                   },]}>{data.size}</Text>
                 </TouchableOpacity>
 
@@ -82,7 +91,18 @@ const DetailsScreen = ({ navigation, route }: any) => {
             }
           </View>
         </View>
-        <PaymentFooter price={price} buttonPressHandler={()=>{}} buttonTitle='Add to Cart'/>
+        <PaymentFooter price={price} buttonPressHandler={() => {
+          addToCarthandler({
+            id: ItemofIndex.id,
+            index: ItemofIndex.index,
+            name: ItemofIndex.name,
+            roasted: ItemofIndex.roasted,
+            imagelink_square: ItemofIndex.imagelink_square,
+            special_ingredient:ItemofIndex.special_ingredient,
+            type:ItemofIndex.type,
+            price: price,
+          })
+        }} buttonTitle='Add to Cart' />
 
       </ScrollView>
     </View>
@@ -90,14 +110,14 @@ const DetailsScreen = ({ navigation, route }: any) => {
 }
 
 const styles = StyleSheet.create({
- 
+
   ScreenContainer: {
     flex: 1,
     backgroundColor: COLORS.primaryBlackHex
   },
   ScrollViewFlex: {
     flexGrow: 1,
-    justifyContent:'space-between',
+    justifyContent: 'space-between',
 
   },
   FooterInfoArea: {
@@ -119,27 +139,27 @@ const styles = StyleSheet.create({
     color: COLORS.primaryWhiteHex,
     marginBottom: SPACING.space_30,
   },
-  SizeOutContainer:{
-    flex:1,
+  SizeOutContainer: {
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     gap: SPACING.space_20
 
   },
-  SizeBox:{
-    flex:1,
-    backgroundColor:COLORS.primaryDarkGreyHex,
-    alignItems:'center',
-    justifyContent:'center',
-    height: SPACING.space_24*2,
-    borderRadius:BORDERRADIUS.radius_10,
-    borderWidth:2,
+  SizeBox: {
+    flex: 1,
+    backgroundColor: COLORS.primaryDarkGreyHex,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: SPACING.space_24 * 2,
+    borderRadius: BORDERRADIUS.radius_10,
+    borderWidth: 2,
 
   },
-  SizeText:{
-    fontFamily:FONTFAMILY.poppins_medium,
+  SizeText: {
+    fontFamily: FONTFAMILY.poppins_medium,
 
-    
+
   },
 
 })
