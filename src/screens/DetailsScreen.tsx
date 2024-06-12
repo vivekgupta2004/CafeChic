@@ -26,7 +26,7 @@ const DetailsScreen = ({ navigation, route }: any) => {
   const calculateCartPrice = useStore((state: any) => state.calculateCartPrice);
 
   const addToCarthandler = ({ id, index, name, roasted, imagelink_square, special_ingredient, type, price }: any) => {
-    addToCart({ id, index, name, roasted, imagelink_square, special_ingredient, type, prics: [{ ...price, quantity: 1 }] });
+    addToCart({ id, index, name, roasted, imagelink_square, special_ingredient, type, prices: [{ ...price, quantity: 1 }] });
     calculateCartPrice();
     navigation.navigate('Cart')
   }
@@ -39,7 +39,6 @@ const DetailsScreen = ({ navigation, route }: any) => {
     <View style={styles.ScreenContainer}>
       <StatusBar backgroundColor={COLORS.primaryBlackHex} />
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.ScrollViewFlex} >
-
         <ImageBackgroundInfo
           EnableBackHandler={true}
           imagelink_portrait={ItemofIndex.imagelink_portrait}
