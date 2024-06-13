@@ -6,13 +6,12 @@ import { COLORS, SPACING } from '../theme/theme';
 import HeaderBar from '../components/HeaderBar';
 import EmptyListAnimation from '../components/EmptyListAnimation';
 import PaymentFooter from '../components/PaymentFooter';
+import CartItem from '../components/CartItem';
 
 
 const CartScreen = ({navigation,route}:any) => {
   const CartList = useStore((state: any) => state.CartList);
   const CartPrice = useStore((state: any) => state.CartPrice);
-
-  
   const incrementCartItemQuantity = useStore((state: any) => state.incrementCartItemQuantity);
   const decreaseCartItemQuantity = useStore((state: any) => state.decreaseCartItemQuantity);
   const calculateCardPrice = useStore((state: any) => state.calculateCardPrice);
@@ -22,6 +21,8 @@ const CartScreen = ({navigation,route}:any) => {
   const buttonPressHandler =()=>{
     navigation.push('Payment')
   }
+  console.log("sdfsdfsd",CartList);
+  
 
   return (
     <View style={styles.ScreenContainer}>
@@ -35,6 +36,17 @@ const CartScreen = ({navigation,route}:any) => {
                 <View style={styles.ListItemContainer}>
                   {CartList.map((data: any) => (
                     <TouchableOpacity onPress={() => { }} key={data.id}>
+                      <CartItem
+                       id ={data.id}
+                       name= {data.name}
+                       imagelink_square={data.imagelink_square}
+                       special_ingredient={data.special_ingredient}
+                       roasted={data.roasted}
+                       prices={data.prices}
+                       type={data.type}
+                       incrementCartItemQuantityHandler={() => {}}
+                       decreaseCartItemQuantityHandler={() => {}}
+                      />
 
                     </TouchableOpacity>
 

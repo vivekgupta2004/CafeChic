@@ -34,7 +34,7 @@ const getCoffeeList = (category: string, data: any) => {
   }
 }
 
-const Homescreen = ({navigation}:any) => {
+const Homescreen = ({ navigation }: any) => {
   const CoffeeList = useStore((state: any) => state.CoffeeList);
   const BeanList = useStore((state: any) => state.BeanList);
   const addToCart = useStore((state: any) => state.addToCart);
@@ -50,36 +50,36 @@ const Homescreen = ({navigation}:any) => {
   const tabBarHeight = useBottomTabBarHeight();
   const ListRef: any = useRef<FlatList>();
 
-  
-  const searchCoffee = (search:string)=>{
-    if(search != ''){
+
+  const searchCoffee = (search: string) => {
+    if (search != '') {
       ListRef?.current?.scrollToOffset({
         animated: true,
         offset: 0
       })
-      setCategoryIndex({index:0,category:categories[0]})
-      setSortedCoffee([...CoffeeList.filter((item:any)=>item.name.toLowerCase().includes(search.toLowerCase()),
+      setCategoryIndex({ index: 0, category: categories[0] })
+      setSortedCoffee([...CoffeeList.filter((item: any) => item.name.toLowerCase().includes(search.toLowerCase()),
       )]
-    )
+      )
     }
   };
 
-  const resetSearchCoffee =()=>{
+  const resetSearchCoffee = () => {
     ListRef?.current?.scrollToOffset({
       animated: true,
       offset: 0
     })
-    setCategoryIndex({index:0,category:categories[0]});
+    setCategoryIndex({ index: 0, category: categories[0] });
     setSortedCoffee([...CoffeeList]);
     setSearchText('');
-    
+
   }
 
   const CoffeCardAddToCart = ({ id, index, name, roasted, imagelink_square, special_ingredient, type, prices }: any) => {
     addToCart({ id, index, name, roasted, imagelink_square, special_ingredient, type, prices, });
     calculateCartPrice();
-    ToastAndroid.showWithGravity(`${name} is added to cart`,ToastAndroid.SHORT, ToastAndroid.CENTER)
-   
+    ToastAndroid.showWithGravity(`${name} is added to cart`, ToastAndroid.SHORT, ToastAndroid.CENTER)
+
   }
 
   return (
@@ -93,19 +93,20 @@ const Homescreen = ({navigation}:any) => {
         {/* Search Input */}
 
         <View style={styles.InputContainerComponent}>
-          <TouchableOpacity onPress={()=>(
+          <TouchableOpacity onPress={() => (
             searchCoffee(searchText)
           )}>
             <CustomIcon style={styles.InputIcon} name='search' size={FONTSIZE.size_18} color={searchText.length > 0 ? COLORS.primaryOrangeHex : COLORS.primaryLightGreyHex} />
           </TouchableOpacity>
           <TextInput placeholder='Find Your  Coffee...' value={searchText}
-           onChangeText={text =>{ setSearchText(text)
-            searchCoffee(text);
-           }}
+            onChangeText={text => {
+              setSearchText(text)
+              searchCoffee(text);
+            }}
             placeholderTextColor={COLORS.primaryLightGreyHex} style={styles.TextInputContainer} />
 
           {searchText.length > 0 ? (
-            <TouchableOpacity onPress={()=>{
+            <TouchableOpacity onPress={() => {
               resetSearchCoffee()
             }}>
               <CustomIcon name="close" size={FONTSIZE.size_16} color={COLORS.primaryLightGreyHex} style={styles.InputIcon} />
@@ -149,7 +150,7 @@ const Homescreen = ({navigation}:any) => {
           data={sortedCoffee} contentContainerStyle={styles.FlatListContainer}
           keyExtractor={item => item.id}
           renderItem={({ item }) => {
-            return (<TouchableOpacity onPress={() =>{ navigation.push('Details', {index:item.index, id:item.id, type:item.type} ) }}>
+            return (<TouchableOpacity onPress={() => { navigation.push('Details', { index: item.index, id: item.id, type: item.type }) }}>
               <CoffeeCard
                 id={item.id}
                 index={item.index}
@@ -174,7 +175,7 @@ const Homescreen = ({navigation}:any) => {
           data={BeanList} contentContainerStyle={[styles.FlatListContainer, { marginBottom: tabBarHeight }]}
           keyExtractor={item => item.id}
           renderItem={({ item }) => {
-            return (<TouchableOpacity  onPress={() =>{ navigation.push('Details', {index:item.index , id : item.id , type: item.type} )}}>
+            return (<TouchableOpacity onPress={() => { navigation.push('Details', { index: item.index, id: item.id, type: item.type }) }}>
               <CoffeeCard
                 id={item.id}
                 index={item.index}
@@ -268,11 +269,11 @@ const styles = StyleSheet.create({
     fontFamily: FONTFAMILY.poppins_medium,
     color: COLORS.secondaryLightGreyHex,
   },
-  EmptyListContainer:{
-    width:Dimensions.get('window').width - SPACING.space_30*2,
-    alignItems:'center',
-    justifyContent:'center',
-    paddingVertical:SPACING.space_36*3.6,
+  EmptyListContainer: {
+    width: Dimensions.get('window').width - SPACING.space_30 * 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: SPACING.space_36 * 3.6,
   }
 
 })
