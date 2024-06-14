@@ -21,7 +21,8 @@ const CartScreen = ({navigation,route}:any) => {
   const buttonPressHandler =()=>{
     navigation.push('Payment')
   }
-  console.log("sdfsdfsd",CartList);
+ 
+  
   
 
   return (
